@@ -1,1 +1,15 @@
+application:
+  currenciesListUrl: https://openexchangerates.org/api/currencies.json
 
+spring:
+  profiles:
+    active: local
+  thymeleaf:
+   cache: false
+
+  messages:
+    encoding: UTF-8
+    fallback-to-system-locale: true
+    basename: i18n/message
+server:
+  port: 8080
