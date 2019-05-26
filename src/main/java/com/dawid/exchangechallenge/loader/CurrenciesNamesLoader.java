@@ -1,7 +1,7 @@
 package com.dawid.exchangechallenge.loader;
 
-import com.dawid.exchangechallenge.client.CurrenciesClient;
 import com.dawid.exchangechallenge.data.CurrenciesNamesStore;
+import com.dawid.exchangechallenge.services.ExchangeService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
 public class CurrenciesNamesLoader {
 
     @Autowired
-    private CurrenciesClient currenciesClient;
+    private ExchangeService currenciesClient;
 
     @PostConstruct
     private void loadCurrenciesList() {
