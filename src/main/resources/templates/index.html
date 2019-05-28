@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -17,38 +18,45 @@
         <center>
             <h2>Select exchange currencies</h2>
         </center>
-        <div class="row container aligned-margines">
-            <div class="row col-12 offset-1">
+        <form class="row container aligned-margines" th:action="@{/add}" method="post" th:object="${transferToBack}">
+            <div class="row col-12 offset-1" >
                 <div class="col-1">From</div>
                 <div class="col-2">
-                    <select>
-                        <option th:each="current : ${currentCountry}" th:text="${current}"></option>
+                    <select th:field="*{sourceCurrency}">
+                        <option type="text"  id="sourceCurrency" name="sourceCurrency"
+                                th:each="current : ${currentCountry}"
+                                th:value="${current}" th:text="${current}"></option>
                     </select>
                 </div>
                 <div class="col-1">To</div>
                 <div class="col-2">
-                    <select>
-                        <option th:each="current : ${currentCountry}" th:text="${current}"></option>
+                    <select th:field="*{targetCurrency}">
+                        <option type="text" id="targetCurrency" name="targetCurrency"
+                                th:each="current : ${currentCountry}"
+                                th:value="${current}" th:text="${current}"></option>
                     </select>
                 </div>
             </div>
             <p></p>
             <div class="row col-12 offset-1">
-                <div class="col-md-2">
-                    <input value="1" type="number" required></input>
+                <div class="col-md-1">
+                    <input  th:field="*{amountToConvert}" value="1" type="number" required></input>
                 </div>
                 <div class="col-1"></div>
-                <div class="col-md-2">
-                    <output style="border-width: 1px"></output>
+                <div class="col-md-1">
+                    <output value="0.0" th:field="*{convertedAmount}" style="border-width: 1px"></output>
+                </div>
+                <div class="col-md-1">
+                    <output value="0.0" th:text="${curriences}" style="border-width: 1px"></output>
                 </div>
                 <div class="col-1">
                     <i class="fas"></i>
                 </div>
-                <div class="col-2">
-                    <button type="button" style="background: #2096f3">Check rate</button>
+                <div class="col-1">
+                    <button type="submit" style="background: #2096f3">Check rate</button>
                 </div>
             </div>
-        </div>
+        </form>
         <center>
             <div class="window container shadow">
                 <div class="boxContent">

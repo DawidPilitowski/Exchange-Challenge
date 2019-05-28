@@ -15,7 +15,8 @@ public class ExchangeController {
     @GetMapping("/exchange")
     public ModelAndView changeMoney() {
         ModelAndView model= new ModelAndView("/exchange");
-        model.addObject("rate", exchangeService.getChangeCurriences());
+//        model.addObject("rate", exchangeService.getChangeCurriences());
+
         return model;
     }
 }

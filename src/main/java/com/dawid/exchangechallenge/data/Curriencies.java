@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Curriences {
+public class Curriencies {
     private Long id;
     private String name;
 }
