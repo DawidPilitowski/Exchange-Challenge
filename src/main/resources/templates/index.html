@@ -39,19 +39,19 @@
             </div>
             <p></p>
             <div class="row col-12 offset-1">
-                <input th:field="*{amountToConvert}" value="1" type="number" required></input>
+                <input th:field="*{amountToConvert}" value="0" type="number" required></input>
                 <div class="col-md-1">
-                    <output value="0" th:text="${from}" style="border-width: 1px"></output>
+                    <output th:text="${from}" style="border-width: 1px"></output>
                 </div>
                 <div><i class="fas fa-exchange-alt"></i></div>
                 <div class="col-md-1">
-                    <output value="0" th:text="${to}" style="border-width: 1px"></output>
+                    <output th:text="${to}" style="border-width: 1px"></output>
                 </div>
                 <!--<div class="col-md-1">-->
                 <!--<output value="0.0" th:field="*{convertedAmount}" style="border-width: 1px"></output>-->
                 <!--</div>-->
                 <div class="col-md-1">
-                    <output value="0.0" th:text="${curriences}" style="border-width: 1px"></output>
+                    <output value="0.0" th:text="${currencies}" style="border-width: 1px"></output>
                 </div>
                 <div class="col-2">
                     <button type="submit" style="background: #2096f3">Check rate</button>

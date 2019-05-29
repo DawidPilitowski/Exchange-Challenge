@@ -1,7 +1,7 @@
 package com.dawid.exchangechallenge.Controller;
 
+import com.dawid.exchangechallenge.data.CurrenciesDTO;
 import com.dawid.exchangechallenge.data.CurrencyConversionVO;
-import com.dawid.exchangechallenge.data.CurrienciesDTO;
 import com.dawid.exchangechallenge.services.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class CurrenciesController {
     }
 
     @PostMapping("/add")
-    public String setMoney(CurrienciesDTO dto, Model model, CurrencyConversionVO currencyConversionVO) {
+    public String setMoney(CurrenciesDTO dto, Model model, CurrencyConversionVO currencyConversionVO) {
         exchangeService.add(dto);
         List list = exchangeService.listAll(currencyConversionVO);
         return "redirect:/add";
@@ -36,19 +36,19 @@ public class CurrenciesController {
     }
 
     @GetMapping("/add")
-    public String getPage(Model model, CurrienciesDTO dto, CurrencyConversionVO currencyConversionVO) {
+    public String getPage(Model model, CurrenciesDTO dto, CurrencyConversionVO currencyConversionVO) {
         model.addAttribute("currentCountry", exchangeService.getKeyList());
-        model.addAttribute("transferToBack", new CurrienciesDTO());
+        model.addAttribute("transferToBack", new CurrenciesDTO());
         List<CurrencyConversionVO> list = exchangeService.listAll(currencyConversionVO);
 
         if (list.size() == 0) {
-            model.addAttribute("curriences", exchangeService.getChangeCurriences(dto));
+            model.addAttribute("currencies", exchangeService.getChangeCurrencies(dto));
         } else {
             if (list.size() == 0) {
-                model.addAttribute("curriences", exchangeService.getChangeCurriences(dto));
+                model.addAttribute("currencies", exchangeService.getChangeCurrencies(dto));
 
             } else {
-                model.addAttribute("curriences", list.get(list.size() - 1).getConvertedAmount());
+                model.addAttribute("currencies", list.get(list.size() - 1).getConvertedAmount());
                 model.addAttribute("from", list.get(list.size() - 1).getSourceCurrency());
                 model.addAttribute("to", list.get(list.size() - 1).getTargetCurrency());
             }

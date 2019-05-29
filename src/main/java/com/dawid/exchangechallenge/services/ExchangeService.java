@@ -1,10 +1,9 @@
 package com.dawid.exchangechallenge.services;
 
-import com.dawid.exchangechallenge.Controller.ExchangeController;
+import com.dawid.exchangechallenge.data.CurrenciesDTO;
 import com.dawid.exchangechallenge.data.CurrencyConversionVO;
-import com.dawid.exchangechallenge.data.CurrienciesDTO;
 import com.dawid.exchangechallenge.properties.ApplicationProperties;
-import com.dawid.exchangechallenge.repository.CurrincesRepository;
+import com.dawid.exchangechallenge.repository.CurrenciesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,9 +24,9 @@ public class ExchangeService {
     @Autowired
     private ApplicationProperties properties;
     @Autowired
-    private CurrincesRepository currincesRepository;
+    private CurrenciesRepository currenciesRepository;
 
-    public double getChangeCurriences(CurrienciesDTO dto) {
+    public double getChangeCurrencies(CurrenciesDTO dto) {
         if (dto.getConvertedAmount() == null) {
             return 0.0;
         } else {
@@ -56,7 +55,7 @@ public class ExchangeService {
         return keyList;
     }
 
-    public void add(CurrienciesDTO dto) {
+    public void add(CurrenciesDTO dto) {
         CurrencyConversionVO currencyConversionVO = new CurrencyConversionVO();
 
         if(dto.getAmountToConvert().isNaN()||dto.getAmountToConvert()==null){
@@ -67,10 +66,10 @@ public class ExchangeService {
         currencyConversionVO.setSourceCurrency(dto.getSourceCurrency());
         currencyConversionVO.setTargetCurrency(dto.getTargetCurrency());
         currencyConversionVO.setConvertedAmount((getRate(dto))*(dto.getAmountToConvert()));
-        currincesRepository.save(currencyConversionVO);
+        currenciesRepository.save(currencyConversionVO);
     }
 
-    private Double getRate(CurrienciesDTO dto) {
+    private Double getRate(CurrenciesDTO dto) {
         String from = dto.getSourceCurrency();
         String to = dto.getTargetCurrency();
         URI uri = UriComponentsBuilder
@@ -84,12 +83,12 @@ public class ExchangeService {
     }
 
     public List<CurrencyConversionVO> listAll(CurrencyConversionVO currencyConversionVO) {
-        return currincesRepository.findAll();
+        return currenciesRepository.findAll();
     }
 
     public Optional<CurrencyConversionVO> findById(CurrencyConversionVO currencyConversionVO) {
         List<CurrencyConversionVO> list = listAll(currencyConversionVO);
         Long a = Long.valueOf(list.size() - 1);
-        return currincesRepository.findById(a);
+        return currenciesRepository.findById(a);
     }
 }
