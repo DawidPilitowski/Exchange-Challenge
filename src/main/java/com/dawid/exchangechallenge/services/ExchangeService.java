@@ -58,13 +58,15 @@ public class ExchangeService {
 
     public void add(CurrienciesDTO dto) {
         CurrencyConversionVO currencyConversionVO = new CurrencyConversionVO();
-        currencyConversionVO.setAmountToConvert(dto.getAmountToConvert());
+
+        if(dto.getAmountToConvert().isNaN()||dto.getAmountToConvert()==null){
+            currencyConversionVO.setAmountToConvert(1.0);
+        }else {
+            currencyConversionVO.setAmountToConvert(dto.getAmountToConvert());
+        }
         currencyConversionVO.setSourceCurrency(dto.getSourceCurrency());
         currencyConversionVO.setTargetCurrency(dto.getTargetCurrency());
-        Double a = getRate(dto);
-        Double b = dto.getAmountToConvert();
-        Double c = a * b;
-        currencyConversionVO.setConvertedAmount(c);
+        currencyConversionVO.setConvertedAmount((getRate(dto))*(dto.getAmountToConvert()));
         currincesRepository.save(currencyConversionVO);
     }
 

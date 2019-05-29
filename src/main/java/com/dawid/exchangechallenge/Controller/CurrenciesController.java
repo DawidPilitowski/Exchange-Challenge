@@ -26,7 +26,6 @@ public class CurrenciesController {
     public String setMoney(CurrienciesDTO dto, Model model, CurrencyConversionVO currencyConversionVO) {
         exchangeService.add(dto);
         List list = exchangeService.listAll(currencyConversionVO);
-        System.out.println("lalal " + list.get(list.size() - 1));
         return "redirect:/add";
     }
 
@@ -50,6 +49,8 @@ public class CurrenciesController {
 
             } else {
                 model.addAttribute("curriences", list.get(list.size() - 1).getConvertedAmount());
+                model.addAttribute("from", list.get(list.size() - 1).getSourceCurrency());
+                model.addAttribute("to", list.get(list.size() - 1).getTargetCurrency());
             }
         }
         return "/index";

@@ -4,9 +4,9 @@
 <head>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/clay/lib/js/clay.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <meta charset="UTF-8">
@@ -19,11 +19,11 @@
             <h2>Select exchange currencies</h2>
         </center>
         <form class="row container aligned-margines" th:action="@{/add}" method="post" th:object="${transferToBack}">
-            <div class="row col-12 offset-1" >
+            <div class="row col-12 offset-1">
                 <div class="col-1">From</div>
                 <div class="col-2">
                     <select th:field="*{sourceCurrency}">
-                        <option type="text"  id="sourceCurrency" name="sourceCurrency"
+                        <option type="text" id="sourceCurrency" name="sourceCurrency"
                                 th:each="current : ${currentCountry}"
                                 th:value="${current}" th:text="${current}"></option>
                     </select>
@@ -39,20 +39,21 @@
             </div>
             <p></p>
             <div class="row col-12 offset-1">
+                <input th:field="*{amountToConvert}" value="1" type="number" required></input>
                 <div class="col-md-1">
-                    <input  th:field="*{amountToConvert}" value="1" type="number" required></input>
+                    <output value="0" th:text="${from}" style="border-width: 1px"></output>
                 </div>
-                <div class="col-1"></div>
+                <div><i class="fas fa-exchange-alt"></i></div>
                 <div class="col-md-1">
-                    <output value="0.0" th:field="*{convertedAmount}" style="border-width: 1px"></output>
+                    <output value="0" th:text="${to}" style="border-width: 1px"></output>
                 </div>
+                <!--<div class="col-md-1">-->
+                <!--<output value="0.0" th:field="*{convertedAmount}" style="border-width: 1px"></output>-->
+                <!--</div>-->
                 <div class="col-md-1">
                     <output value="0.0" th:text="${curriences}" style="border-width: 1px"></output>
                 </div>
-                <div class="col-1">
-                    <i class="fas"></i>
-                </div>
-                <div class="col-1">
+                <div class="col-2">
                     <button type="submit" style="background: #2096f3">Check rate</button>
                 </div>
             </div>
@@ -208,13 +209,22 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <button>24H</button>
+                    <button>1W</button>
+                    <button>1M</button>
+                    <button>3M</button>
+                    <button>6M</button>
+                    <button>1Y</button>
+                    <button>5Y</button>
+                    <button>MAX</button>
+                </div>
             </div>
         </center>
         <center>
             <h4>Historical exchange chart</h4>
         </center>
     </div>
-
 </main>
 <div th:fragment="scripts">
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
